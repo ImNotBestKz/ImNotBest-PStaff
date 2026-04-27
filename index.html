@@ -304,6 +304,21 @@
     opacity: 0.5;
   }
 
+  #music-status {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--cyan);
+    background: var(--surface);
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
   @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
@@ -311,6 +326,13 @@
 <body>
 
 <canvas id="canvas"></canvas>
+
+<audio id="bg-music" loop>
+  <source src="https://minecraft.wiki/w/File:Cat.ogg" type="audio/ogg">
+  <source src="https://www.mboxdrive.com/cat_minecraft.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-status">♫ AUDIO: CLICK EN LA PÁGINA PARA ACTIVAR</div>
 
 <main>
   <header>
@@ -436,6 +458,19 @@
 </footer>
 
 <script>
+const music = document.getElementById('bg-music');
+const statusText = document.getElementById('music-status');
+music.volume = 0.2; 
+
+window.addEventListener('click', () => {
+  if (music.paused) {
+    music.play().then(() => {
+      statusText.innerText = "♫ REPRODUCIENDO: CAT";
+      statusText.style.opacity = "0.3";
+    }).catch(e => console.log("Error al reproducir:", e));
+  }
+}, { once: false });
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
