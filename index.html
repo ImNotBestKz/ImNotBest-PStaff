@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Staff Application — TuNick</title>
+<title>Portafolio — ImNotBest</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Oxanium:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -26,7 +26,6 @@
     overflow-x: hidden;
   }
 
-  /* ── Canvas de partículas ── */
   #canvas {
     position: fixed;
     inset: 0;
@@ -34,7 +33,6 @@
     z-index: 0;
   }
 
-  /* ── Ruido de fondo ── */
   body::before {
     content: '';
     position: fixed;
@@ -53,23 +51,10 @@
     padding: 60px 24px 100px;
   }
 
-  /* ── HEADER ── */
   header {
     text-align: center;
-    margin-bottom: 64px;
+    margin-bottom: 10px;
     animation: fadeDown 0.8s ease both;
-  }
-
-  .tag {
-    display: inline-block;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--cyan);
-    border: 1px solid var(--border);
-    padding: 6px 16px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
   }
 
   h1 {
@@ -78,7 +63,6 @@
     font-weight: 700;
     line-height: 0.95;
     letter-spacing: -2px;
-    text-transform: uppercase;
   }
 
   h1 .nick {
@@ -87,40 +71,43 @@
     text-shadow: 0 0 40px rgba(0,245,255,0.5), 0 0 80px rgba(0,245,255,0.2);
   }
 
-  h1 .role-label {
-    display: block;
-    font-size: 0.38em;
-    color: var(--dim);
-    letter-spacing: 6px;
-    font-weight: 400;
-    margin-top: 6px;
+  #skin-container {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.2s;
+  }
+
+  #skin-render {
+    height: 320px;
+    width: auto;
+    filter: drop-shadow(0 0 25px rgba(0, 245, 255, 0.5));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  #skin-render:hover {
+    transform: scale(1.08) translateY(-10px);
   }
 
   .divider {
     width: 120px;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-    margin: 28px auto;
+    margin: 15px auto;
   }
 
   .subtitle {
     font-size: 14px;
     color: var(--dim);
     font-family: 'Share Tech Mono', monospace;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 
-  /* ── SECCIONES ── */
   section {
     margin-bottom: 48px;
     animation: fadeUp 0.7s ease both;
   }
-
-  section:nth-child(2) { animation-delay: 0.1s; }
-  section:nth-child(3) { animation-delay: 0.2s; }
-  section:nth-child(4) { animation-delay: 0.3s; }
-  section:nth-child(5) { animation-delay: 0.4s; }
-  section:nth-child(6) { animation-delay: 0.5s; }
 
   .section-label {
     font-family: 'Share Tech Mono', monospace;
@@ -132,23 +119,11 @@
     opacity: 0.7;
   }
 
-  h2 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 26px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-    color: var(--white);
-  }
-
-  /* ── CARD ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 24px 28px;
     position: relative;
-    transition: border-color 0.3s, box-shadow 0.3s;
   }
 
   .card::before {
@@ -161,31 +136,12 @@
     box-shadow: 0 0 12px var(--cyan);
   }
 
-  .card:hover {
-    border-color: rgba(0,245,255,0.35);
-    box-shadow: 0 0 30px rgba(0,245,255,0.06);
-  }
-
-  .card p, .card li {
+  .card p {
     font-size: 15px;
     line-height: 1.7;
     color: #c0d8e0;
   }
 
-  .card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .card ul li::before {
-    content: '▸ ';
-    color: var(--cyan);
-    font-size: 12px;
-  }
-
-  /* ── GRID DE STATS ── */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -197,13 +153,6 @@
     border: 1px solid var(--border);
     padding: 20px;
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: default;
-  }
-
-  .stat-box:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(0,245,255,0.1);
   }
 
   .stat-num {
@@ -224,7 +173,6 @@
     font-family: 'Share Tech Mono', monospace;
   }
 
-  /* ── SERVIDORES ── */
   .server-list {
     display: flex;
     flex-direction: column;
@@ -239,10 +187,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    transition: border-color 0.3s;
   }
-
-  .server-item:hover { border-color: rgba(0,245,255,0.3); }
 
   .server-name {
     font-family: 'Rajdhani', sans-serif;
@@ -263,10 +208,8 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 11px;
     color: var(--dim);
-    white-space: nowrap;
   }
 
-  /* ── HABILIDADES ── */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -283,7 +226,6 @@
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 8px;
-    letter-spacing: 0.5px;
   }
 
   .skill-bar {
@@ -297,11 +239,8 @@
     height: 100%;
     background: linear-gradient(90deg, var(--cyan), rgba(0,245,255,0.3));
     box-shadow: 0 0 8px var(--cyan);
-    animation: barFill 1.2s ease both;
-    animation-delay: 0.6s;
   }
 
-  /* ── POR QUÉ YO ── */
   .why-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -313,18 +252,12 @@
     border: 1px solid var(--border);
     padding: 22px 20px;
     text-align: center;
-    transition: box-shadow 0.3s, transform 0.2s;
-  }
-
-  .why-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,245,255,0.08);
-    border-color: rgba(0,245,255,0.25);
   }
 
   .why-icon {
-    font-size: 28px;
-    margin-bottom: 10px;
+    font-size: 32px;
+    margin-bottom: 12px;
+    display: block;
   }
 
   .why-title {
@@ -332,7 +265,6 @@
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
     color: var(--cyan);
     margin-bottom: 8px;
   }
@@ -343,7 +275,6 @@
     line-height: 1.6;
   }
 
-  /* ── CONTACTO ── */
   .contact-row {
     display: flex;
     flex-wrap: wrap;
@@ -357,18 +288,10 @@
     font-family: 'Share Tech Mono', monospace;
     font-size: 13px;
     color: var(--cyan);
-    letter-spacing: 1px;
-    transition: background 0.2s, box-shadow 0.2s;
   }
 
   .contact-chip span { color: var(--dim); margin-right: 8px; }
 
-  .contact-chip:hover {
-    background: rgba(0,245,255,0.08);
-    box-shadow: 0 0 20px rgba(0,245,255,0.1);
-  }
-
-  /* ── FOOTER ── */
   footer {
     text-align: center;
     margin-top: 80px;
@@ -381,31 +304,8 @@
     opacity: 0.5;
   }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes barFill {
-    from { width: 0; }
-    to   { width: var(--w); }
-  }
-
-  /* ── NOTA EDITABLE ── */
-  .edit-note {
-    background: rgba(255,0,110,0.06);
-    border: 1px dashed rgba(255,0,110,0.3);
-    padding: 10px 16px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: #ff669a;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
@@ -413,215 +313,153 @@
 <canvas id="canvas"></canvas>
 
 <main>
-
-  <!-- HEADER -->
   <header>
-    <div class="tag">Staff Application · Helper</div>
     <h1>
-      <span class="nick">TuNick</span>
-      <span class="role-label">Crystal PvP · Helper Application</span>
+      <span class="nick">ImNotBest</span>
     </h1>
-    <div class="divider"></div>
-    <p class="subtitle">// portafolio de postulación — [año actual]</p>
   </header>
 
-  <!-- SOBRE MÍ -->
+  <div id="skin-container">
+    <img src="skinmc-avatar (1).png" alt="Minecraft Skin" id="skin-render">
+    <div class="divider"></div>
+    <p class="subtitle">// PORTAFOLIO</p>
+  </div>
+
   <section>
     <div class="section-label">// 01 — Sobre mí</div>
-    <div class="edit-note">✎ Edita esta sección con tu info real</div>
     <div class="card">
       <p>
-        Soy <strong style="color:var(--cyan)">TuNick</strong>, jugador activo de Crystal PvP con [X] años en la comunidad de Minecraft. 
-        Me especializo en el meta de 1.8/1.21 Crystal, con experiencia real en servidores competitivos. 
-        Busco contribuir como Helper para mantener un ambiente limpio, justo y activo — tanto en el servidor como en el Discord.
+        Soy <strong style="color:var(--cyan)">ImNotBest</strong>, jugador activo de Crystal PvP. 
+        Tengo experiencia en el meta del PvP Crystal y en servidores competitivos / survival pvp. 
+        Busco contribuir para mantener un ambiente limpio, justo y activo tanto en los servidores de Minecraft con la comunidad, como en el Discord donde también sé llevar el control y moderación del mismo.
       </p>
     </div>
   </section>
 
-  <!-- ESTADÍSTICAS -->
   <section>
     <div class="section-label">// 02 — Estadísticas</div>
     <div class="stats-grid">
       <div class="stat-box">
-        <div class="stat-num">XX</div>
-        <div class="stat-desc">Edad</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">X+</div>
+        <div class="stat-num">+4</div>
         <div class="stat-desc">Años jugando</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">Xh</div>
+        <div class="stat-num">5h+</div>
         <div class="stat-desc">Disponibilidad / día</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">GMT-X</div>
+        <div class="stat-num">GMT-6</div>
         <div class="stat-desc">Zona horaria</div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCIA COMO STAFF -->
   <section>
     <div class="section-label">// 03 — Experiencia como Staff</div>
     <div class="server-list">
-
       <div class="server-item">
         <div>
-          <div class="server-name">NombreServer1</div>
+          <div class="server-name">LosTaroleros</div>
           <div class="server-role">Helper → Moderador</div>
         </div>
-        <div class="server-period">Ene 2023 — Jun 2023</div>
+        <div class="server-period">2025 — 2026</div>
       </div>
-
       <div class="server-item">
         <div>
-          <div class="server-name">NombreServer2</div>
-          <div class="server-role">Helper</div>
+          <div class="server-name">SoloLegends</div>
+          <div class="server-role">Trial-Mod</div>
         </div>
-        <div class="server-period">Ago 2023 — Dic 2023</div>
+        <div class="server-period">2025</div>
       </div>
-
     </div>
   </section>
 
-  <!-- HABILIDADES -->
   <section>
     <div class="section-label">// 04 — Habilidades</div>
     <div class="skills-grid">
-
       <div class="skill-item">
         <div class="skill-name">Conocimiento de Crystal PvP</div>
-        <div class="skill-bar"><div class="skill-fill" style="--w: 90%;"></div></div>
+        <div class="skill-bar"><div class="skill-fill" style="width: 100%;"></div></div>
       </div>
-
-      <div class="skill-item">
-        <div class="skill-name">Atención a jugadores / soporte</div>
-        <div class="skill-bar"><div class="skill-fill" style="--w: 85%;"></div></div>
-      </div>
-
-      <div class="skill-item">
-        <div class="skill-name">Detección de hacks / cheats</div>
-        <div class="skill-bar"><div class="skill-fill" style="--w: 80%;"></div></div>
-      </div>
-
-      <div class="skill-item">
-        <div class="skill-name">Manejo de conflictos</div>
-        <div class="skill-bar"><div class="skill-fill" style="--w: 75%;"></div></div>
-      </div>
-
       <div class="skill-item">
         <div class="skill-name">Discord (bots, moderación)</div>
-        <div class="skill-bar"><div class="skill-fill" style="--w: 70%;"></div></div>
+        <div class="skill-bar"><div class="skill-fill" style="width: 70%;"></div></div>
       </div>
-
       <div class="skill-item">
-        <div class="skill-name">Comunicación / reportes</div>
-        <div class="skill-bar"><div class="skill-fill" style="--w: 85%;"></div></div>
+        <div class="skill-name">Detección de hacks / cheats</div>
+        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
       </div>
-
+      <div class="skill-item">
+        <div class="skill-name">Atención a jugadores / soporte</div>
+        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+      </div>
     </div>
   </section>
 
-  <!-- POR QUÉ YO -->
   <section>
     <div class="section-label">// 05 — ¿Por qué yo?</div>
     <div class="why-grid">
-
       <div class="why-card">
-        <div class="why-icon">⚔️</div>
-        <div class="why-title">Conozco el meta</div>
-        <div class="why-text">Soy jugador activo de Crystal. Sé distinguir jugabilidad legítima de hacks sin castigar falsos positivos.</div>
+        <span class="why-icon">⚔️</span>
+        <div class="why-title">Criterio en combate</div>
+        <div class="why-text">Mi conocimiento en el tema del crystal pvp [lt3] me permite diferenciar perfectamente a un jugador legal de uno con uso de ventajas externas o cheats.</div>
       </div>
-
       <div class="why-card">
-        <div class="why-icon">🧊</div>
-        <div class="why-title">Cabeza fría</div>
-        <div class="why-text">Ante conflictos entre jugadores mantengo la calma, escucho ambas partes y actúo con criterio.</div>
+        <span class="why-icon">🧊</span>
+        <div class="why-title">Gestión de comunidad</div>
+        <div class="why-text">Sé cómo manejar el orden en chats concurridos y configurar herramientas de moderación en Discord para un control 24/7.</div>
       </div>
-
       <div class="why-card">
-        <div class="why-icon">🕐</div>
-        <div class="why-title">Disponibilidad real</div>
-        <div class="why-text">Puedo estar activo [X] horas diarias, incluyendo fines de semana donde hay más tráfico.</div>
+        <span class="why-icon">🕐</span>
+        <div class="why-title">Neutralidad</div>
+        <div class="why-text">Mantengo una postura imparcial ante los problemas que se pueden enfrentar, siempre poniendo delante las normas del servidor.</div>
       </div>
-
       <div class="why-card">
-        <div class="why-icon">📋</div>
-        <div class="why-title">Experiencia previa</div>
-        <div class="why-text">Ya fui Staff en otros servidores. No necesito aprender desde cero — sé cómo funciona el rol.</div>
+        <span class="why-icon">📋</span>
+        <div class="why-title">Compromiso</div>
+        <div class="why-text">Puedo tener una presencia constante y activa tanto en el servidor de Minecraft como en el de Discord para atender todos los reportes de usuarios y sus consultas.</div>
       </div>
-
     </div>
   </section>
 
-  <!-- CONTACTO -->
   <section>
     <div class="section-label">// 06 — Contacto</div>
     <div class="contact-row">
-      <div class="contact-chip"><span>Discord</span>TuNick#0000</div>
-      <div class="contact-chip"><span>IGN</span>TuNick</div>
-      <div class="contact-chip"><span>Edad</span>XX años</div>
+      <div class="contact-chip"><span>Discord</span>slinkyuser_</div>
+      <div class="contact-chip"><span>IGN</span>ImNotBest</div>
     </div>
   </section>
-
 </main>
 
 <footer>
-  STAFF APPLICATION · HELPER · CRYSTAL PVP · [SERVER NAME]
+  STAFF · IMNOTBEST · 2026
 </footer>
 
-<!-- PARTÍCULAS -->
 <script>
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
-
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 window.addEventListener('resize', resize);
 resize();
-
 class Particle {
   constructor() { this.reset(); }
   reset() {
-    this.x = Math.random() * W;
-    this.y = Math.random() * H;
+    this.x = Math.random() * W; this.y = Math.random() * H;
     this.size = Math.random() * 1.5 + 0.3;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = (Math.random() - 0.5) * 0.3;
+    this.vx = (Math.random() - 0.5) * 0.3; this.vy = (Math.random() - 0.5) * 0.3;
     this.alpha = Math.random() * 0.4 + 0.05;
     this.color = Math.random() > 0.7 ? '#ff006e' : '#00f5ff';
   }
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
-  }
+  update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset(); }
   draw() {
-    ctx.save();
-    ctx.globalAlpha = this.alpha;
-    ctx.fillStyle = this.color;
-    ctx.shadowBlur = 6;
-    ctx.shadowColor = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
+    ctx.save(); ctx.globalAlpha = this.alpha; ctx.fillStyle = this.color;
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); ctx.restore();
   }
 }
-
 for (let i = 0; i < 120; i++) particles.push(new Particle());
-
-function loop() {
-  ctx.clearRect(0, 0, W, H);
-  particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(loop);
-}
+function loop() { ctx.clearRect(0, 0, W, H); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(loop); }
 loop();
 </script>
-
 </body>
 </html>
